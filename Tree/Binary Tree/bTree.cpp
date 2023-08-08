@@ -38,11 +38,45 @@ node * buildTree( node * root ){
 
 }
 
+void levelOrderTraversal (node * root){
+    queue<node*> q ;
+    q.push(root) ;
+    q.push(nullptr) ;
+
+    while( !q.empty()){
+        node* temp = q.front() ;
+        q.pop() ;
+
+
+        if( temp == nullptr){
+            cout << endl;
+            if( !q.empty()){
+                q.push(nullptr) ;
+            }
+        }
+        else{
+             cout << temp->data << " ";
+
+            if( temp->left){
+                q.push(temp->left) ;
+            }
+
+            if( temp->right){
+                q.push(temp->right) ;
+            }
+            
+        }
+       
+    }
+}
+
 int main() {
 
     node* root = nullptr ;
+    // 1 2 6 -1 -1 7 -1 -1 3 4 -1 -1 5 -1 -1
 
     root = buildTree(root) ;
 
+    levelOrderTraversal(root);
     return 0;
 }
