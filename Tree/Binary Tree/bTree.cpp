@@ -1,15 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std ;
 
-class node {
+class Node {
    
 public:
 
     int data ;
-    node* left ;
-    node* right ;
+    Node* left ;
+    Node* right ;
 
-    node( int n){
+    Node( int n){
         this->data = n ;
         this->left = nullptr;
         this->right = nullptr;
@@ -17,7 +17,7 @@ public:
 
 };
 
-node * buildTree( node * root ){
+Node * buildTree( Node * root ){
 
     cout << "Enter data: " << endl; 
     int data ;
@@ -27,7 +27,7 @@ node * buildTree( node * root ){
         return nullptr;
     }
 
-    root = new node(data) ;
+    root = new Node(data) ;
 
     cout << "Data for left of " << data  << endl;
     root->left = buildTree(root->left) ;
@@ -38,13 +38,13 @@ node * buildTree( node * root ){
 
 }
 
-void levelOrderTraversal (node * root){
-    queue<node*> q ;
+void levelOrderTraversal (Node * root){
+    queue<Node*> q ;
     q.push(root) ;
     q.push(nullptr) ;
 
     while( !q.empty()){
-        node* temp = q.front() ;
+        Node* temp = q.front() ;
         q.pop() ;
 
 
@@ -70,13 +70,58 @@ void levelOrderTraversal (node * root){
     }
 }
 
+void inorderTraversal(Node* root){
+
+    if(root == nullptr){
+        return ;
+    }
+
+    inorderTraversal(root->left) ;
+    cout << root->data << " " ;
+    inorderTraversal(root->right) ;
+
+}
+
+void preorderTraversal(Node* root){
+
+    if(root == nullptr){
+        return ;
+    }
+
+    cout << root->data << " " ;
+    preorderTraversal(root->left) ;
+    preorderTraversal(root->right) ;
+
+}
+
+void postorderTraversal(Node* root){
+
+    if(root == nullptr){
+        return ;
+    }
+
+    postorderTraversal(root->left) ;
+    postorderTraversal(root->right) ;
+    cout << root->data << " " ;
+
+}
+
 int main() {
 
-    node* root = nullptr ;
-    // 1 2 6 -1 -1 7 -1 -1 3 4 -1 -1 5 -1 -1
+    Node* root = nullptr ;
+    // 1 2 4 -1 -1 5 -1 -1 3 6 -1 -1 7 -1 -1
 
     root = buildTree(root) ;
 
-    levelOrderTraversal(root);
+    // levelOrderTraversal(root);
+    cout << "Inorder: " ;
+    inorderTraversal(root) ;
+    cout << endl;
+    cout << "Preorder: " ;
+    preorderTraversal(root) ;
+    cout << endl;
+    cout << "Postorder: " ;
+    postorderTraversal(root) ;
+    cout << endl;
     return 0;
 }
