@@ -47,7 +47,6 @@ void levelOrderTraversal (Node * root){
         Node* temp = q.front() ;
         q.pop() ;
 
-
         if( temp == nullptr){
             cout << endl;
             if( !q.empty()){
@@ -68,6 +67,43 @@ void levelOrderTraversal (Node * root){
         }
        
     }
+}
+
+void buildTreeLevelOrder(Node * &root){
+
+    queue<Node*> q ;
+    cout << "Root: ";
+    int data ;
+    cin >> data;
+    root = new Node(data) ;
+    q.push(root);
+
+    while(!q.empty()){
+        Node* temp = q.front() ;
+        q.pop() ;
+
+        cout << "Left Node for: " << temp->left << endl ;
+        int leftD;
+        cin >> leftD ;
+
+        if( leftD != -1){
+            temp->left = new Node(leftD);
+            q.push(temp->left) ;
+        }
+
+        cout << "Right Node for: " << temp->right << endl ; ;
+        int rightD;
+        cin >> rightD ;
+
+        if( rightD != -1){
+            temp->right = new Node(rightD);
+            q.push(temp->right);
+        }
+
+    }
+    // return root ;
+    
+
 }
 
 void inorderTraversal(Node* root){
@@ -111,17 +147,22 @@ int main() {
     Node* root = nullptr ;
     // 1 2 4 -1 -1 5 -1 -1 3 6 -1 -1 7 -1 -1
 
-    root = buildTree(root) ;
+    // root = buildTree(root) ;
 
     // levelOrderTraversal(root);
-    cout << "Inorder: " ;
-    inorderTraversal(root) ;
-    cout << endl;
-    cout << "Preorder: " ;
-    preorderTraversal(root) ;
-    cout << endl;
-    cout << "Postorder: " ;
-    postorderTraversal(root) ;
-    cout << endl;
+    // cout << "Inorder: " ;
+    // inorderTraversal(root) ;
+    // cout << endl;
+    // cout << "Preorder: " ;
+    // preorderTraversal(root) ;
+    // cout << endl;
+    // cout << "Postorder: " ;
+    // postorderTraversal(root) ;
+    // cout << endl;
+
+    buildTreeLevelOrder(root) ;
+    levelOrderTraversal(root);
+
+
     return 0;
 }
